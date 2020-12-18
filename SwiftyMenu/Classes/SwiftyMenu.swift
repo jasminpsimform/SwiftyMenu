@@ -262,7 +262,7 @@ extension SwiftyMenu: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
             cell.textLabel?.text = items[indexPath.row].displayableValue
             cell.textLabel?.textColor = itemTextColor
-            cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
             cell.tintColor = itemTextColor
             cell.backgroundColor = rowBackgroundColor
             cell.accessoryType = selectedIndecis[indexPath.row] != nil ? .checkmark : .none
@@ -272,7 +272,7 @@ extension SwiftyMenu: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OptionCell", for: indexPath)
             cell.textLabel?.text = items[indexPath.row].displayableValue
             cell.textLabel?.textColor = itemTextColor
-            cell.textLabel?.font = UIFont.systemFont(ofSize: 12)
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
             cell.tintColor = itemTextColor
             cell.backgroundColor = rowBackgroundColor
             cell.accessoryType = indexPath.row == selectedIndex ? .checkmark : .none
@@ -313,7 +313,7 @@ extension SwiftyMenu: UITableViewDelegate {
         } else {
             if selectedIndex == indexPath.row {
                 if hideOptionsWhenSelect {
-                    collapseSwiftyMenu()
+                    handleMenuState()
                 }
             } else {
                 selectedIndex = indexPath.row
@@ -323,7 +323,7 @@ extension SwiftyMenu: UITableViewDelegate {
                 self.didSelectItem(self, selectedText, indexPath.row)
                 tableView.reloadData()
                 if hideOptionsWhenSelect {
-                    collapseSwiftyMenu()
+                    handleMenuState()
                 }
             }
         }
@@ -371,7 +371,7 @@ extension SwiftyMenu {
             selectButton.setTitle(placeHolderText, for: .normal)
             selectButton.layoutIfNeeded()
         }
-        selectButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        selectButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         if UIView.userInterfaceLayoutDirection(for: selectButton.semanticContentAttribute) == .rightToLeft {
             selectButton.imageEdgeInsets.right = width - 16
             selectButton.titleEdgeInsets.left = 32
@@ -411,8 +411,8 @@ extension SwiftyMenu {
         itemsTableView.delegate = self
         itemsTableView.dataSource = self
         itemsTableView.rowHeight = CGFloat(rowHeight)
-        itemsTableView.separatorInset.left = 8
-        itemsTableView.separatorInset.right = 8
+        itemsTableView.separatorInset.left = 0
+        itemsTableView.separatorInset.right = 0
         itemsTableView.backgroundColor = rowBackgroundColor
         itemsTableView.isScrollEnabled = scrollingEnabled
         itemsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "OptionCell")
